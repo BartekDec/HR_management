@@ -14,16 +14,17 @@ namespace Repository.Models
 {
     public class HrContext : IdentityDbContext, IHrContext
     {
-      
-            public HrContext()
-                : base("DefaultConnection")
-            {
-            }
 
-            public static HrContext Create()
-            {
-                return new HrContext();
-            }
+        public HrContext()
+            : base("DefaultConnection")
+        {
+
+        }
+
+        public static HrContext Create()
+        {
+            return new HrContext();
+        }
         public DbSet<User> User { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<EmploymentType> EmploymentType { get; set; }

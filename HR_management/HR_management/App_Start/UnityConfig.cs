@@ -1,3 +1,5 @@
+using HR_management.ControllersComponents;
+using HR_management.ControllersInterfaces;
 using Microsoft.AspNet.Identity;
 using Repository.DataAccess;
 using Repository.Interfaces;
@@ -55,7 +57,12 @@ namespace HR_management
             container.RegisterType<IEmployee, EmployeeAccess>(new PerRequestLifetimeManager());
             container.RegisterType<IEmploymentType, EmploymentTypeAccess>(new PerRequestLifetimeManager());
             container.RegisterType<IHrContext, HrContext>(new PerRequestLifetimeManager());
-      
+            container.RegisterType<ISalaryComponents, SalaryComponents>(new PerRequestLifetimeManager());
+            container.RegisterType<IEmployeeComponents, EmployeeComponents>(new PerRequestLifetimeManager());
+            container.RegisterType<IEmploymentTypeComponents, EmploymentTypeComponents>(new PerRequestLifetimeManager());
+            container.RegisterType<IRoleComponents, RoleComponents>(new PerRequestLifetimeManager());
+            container.RegisterType<IPermissionComponents, PermissionComponents>(new PerRequestLifetimeManager());
+
 
 
         }

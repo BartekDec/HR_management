@@ -12,7 +12,7 @@ using HR_management.ControllersInterfaces;
 
 namespace HR_management.ControllersComponents
 {
-    public class SalaryComponents : Controller, ISalaryController
+    public class SalaryComponents : Controller, ISalaryComponents
     {
         private readonly ISalary _Isalary;
         private readonly IHrContext _context;
@@ -22,7 +22,37 @@ namespace HR_management.ControllersComponents
             _Isalary = salary;
             _context = context;
         }
-        public
+        public IQueryable<Salary> GetSalary()
+        {
+            var salary = _Isalary.GetSalary();
+            return salary;
+        }
 
+        public Salary GetSalaryById(int id)
+        {
+            var salary = _Isalary.GetSalaryById(id);
+            return salary;
+        }
+
+        public void AddSalary(Salary salary)
+        {
+            _Isalary.AddSalary(salary);
+
+        }
+
+        public void SaveChnages()
+        {
+            _Isalary.SaveChanges();
+        }
+
+        public void DeleteSalary(int id)
+        {
+            _Isalary.DeleteSalary(id);
+
+        }
+        public void Actualize(Salary salary)
+        {
+            _Isalary.Actualize(salary);
+        }
     }
 }

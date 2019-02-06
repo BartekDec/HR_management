@@ -7,18 +7,28 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Repository.Models;
+using HR_management.ControllersInterfaces;
+using Repository.Interfaces;
 
 namespace HR_management.Controllers
 {
     public class SalaryController : Controller
     {
-        private HrContext db = new HrContext();
+       
+        private readonly ISalaryComponents _salaryComponent;
+        private readonly IHrContext _context;
+
+        public SalaryController(ISalaryComponents salaryComponent, IHrContext context)
+        {
+            _salaryComponent = salaryComponent;
+            _context = context;
+        }
 
         // GET: Salary
         public ActionResult Index()
         {
-            var salary = db.Salary.Include(s => s.EmploymentType);
-            return View(salary.ToList());
+            var salary = _salaryComponent.GetSalary();
+            return View(salary);
         }
 
         // GET: Salary/Details/5
@@ -28,7 +38,7 @@ namespace HR_management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Salary salary = db.Salary.Find(id);
+            Salary salary = _salaryComponent.GetSalaryById((int)id);
             if (salary == null)
             {
                 return HttpNotFound();
@@ -39,7 +49,7 @@ namespace HR_management.Controllers
         // GET: Salary/Create
         public ActionResult Create()
         {
-            ViewBag.EmploymentTypeId = new SelectList(db.EmploymentType, "Id", "EmpTypeName");
+            ViewBag.EmploymentTypeId = new SelectList(_context.EmploymentType, "Id", "EmpTypeName");
             return View();
         }
 
@@ -52,12 +62,21 @@ namespace HR_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Salary.Add(salary);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    _salaryComponent.AddSalary(salary);
+                    _salaryComponent.SaveChnages();
+                    return RedirectToAction("Index");
+                }
+                catch
+                {
+                    return View(salary);
+                }
+        
+               
             }
 
-            ViewBag.EmploymentTypeId = new SelectList(db.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
+            ViewBag.EmploymentTypeId = new SelectList(_context.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
             return View(salary);
         }
 
@@ -68,12 +87,12 @@ namespace HR_management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Salary salary = db.Salary.Find(id);
+            Salary salary = _salaryComponent.GetSalaryById((int)id);
             if (salary == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.EmploymentTypeId = new SelectList(db.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
+            ViewBag.EmploymentTypeId = new SelectList(_context.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
             return View(salary);
         }
 
@@ -86,11 +105,19 @@ namespace HR_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(salary).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    _salaryComponent.Actualize(salary);
+                    _salaryComponent.SaveChnages();
+                }
+                catch
+                {
+                    return View(salary);
+                }
+           
+                //return RedirectToAction("Index");
             }
-            ViewBag.EmploymentTypeId = new SelectList(db.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
+            ViewBag.EmploymentTypeId = new SelectList(_context.EmploymentType, "Id", "EmpTypeName", salary.EmploymentTypeId);
             return View(salary);
         }
 
@@ -101,7 +128,7 @@ namespace HR_management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Salary salary = db.Salary.Find(id);
+            Salary salary = _salaryComponent.GetSalaryById((int)id);
             if (salary == null)
             {
                 return HttpNotFound();
@@ -114,19 +141,26 @@ namespace HR_management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Salary salary = db.Salary.Find(id);
-            db.Salary.Remove(salary);
-            db.SaveChanges();
+            _salaryComponent.DeleteSalary(id);
+            try
+            {
+                _salaryComponent.SaveChnages();
+            }
+            catch
+            {
+                return RedirectToAction("Delete");
+            }
+
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

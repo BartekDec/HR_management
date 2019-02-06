@@ -152,7 +152,9 @@
   <ItemGroup>
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\EmployeeAccess.cs" />
@@ -168,9 +170,9 @@
     <Compile Include="Interfaces\IRole.cs" />
     <Compile Include="Interfaces\ISalary.cs" />
     <Compile Include="Interfaces\IUser.cs" />
-    <Compile Include="Migrations\201902030842587_beginning.cs" />
-    <Compile Include="Migrations\201902030842587_beginning.Designer.cs">
-      <DependentUpon>201902030842587_beginning.cs</DependentUpon>
+    <Compile Include="Migrations\201902061822337_initialize.cs" />
+    <Compile Include="Migrations\201902061822337_initialize.Designer.cs">
+      <DependentUpon>201902061822337_initialize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Employee.cs" />
@@ -185,11 +187,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201902030842587_beginning.resx">
-      <DependentUpon>201902030842587_beginning.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902061822337_initialize.resx">
+      <DependentUpon>201902061822337_initialize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

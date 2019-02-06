@@ -49,8 +49,7 @@ C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_mana
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\bin\System.Web.WebPages.xml
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\bin\System.Web.WebPages.Razor.xml
-C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.csprojResolveAssemblyReference.cache
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.dll
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.pdb
-C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.Migrations.beginning.resources
+C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.Migrations.initialize.resources
 C:\Users\Bartek\Desktop\pk\semestr 5\technologie obiektowe\HR_management\HR_management\Repository\obj\Debug\Repository.csproj.GenerateResource.Cache
